@@ -3,10 +3,13 @@
 
   outputs = { self, nixpkgs }: {
 
-    devShells.x86_64-darwin.default = let pkgs = nixpkgs.legacyPackages.x86_64-darwin; in pkgs.mkShell {
+    devShells.x86_64-darwin.default =
+      let pkgsCross = nixpkgs.legacyPackages.x86_64-darwin.pkgsCross.arm-embedded;
+          pkgs = nixpkgs.legacyPackages.x86_64-darwin;
+    in pkgs.mkShell {
       nativeBuildInputs = with pkgs; [
-        (python3.withPackages (p: with p; [
-          anytree
+        (pkgsCross.buildPackages.python3.withPackages (p: with p; [
+          # anytree
           canopen
           intelhex
           packaging
@@ -22,8 +25,8 @@
         cmake
         dfu-util
         dtc
-        gcc
-        gcc-arm-embedded
+        pkgsCross.buildPackages.gcc
+        pkgsCross.buildPackages.gcc-arm-embedded
         ninja
         wget
       ];
@@ -31,7 +34,7 @@
         [ -f zmk/zephyr/zephyr-env.sh ] && source zmk/zephyr/zephyr-env.sh
       '';
       ZEPHYR_TOOLCHAIN_VARIANT= "gnuarmemb";
-      GNUARMEMB_TOOLCHAIN_PATH = pkgs.gcc-arm-embedded;
+      GNUARMEMB_TOOLCHAIN_PATH = pkgsCross.buildPackages.gcc-arm-embedded;
     };
   };
 }
