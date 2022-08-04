@@ -10,18 +10,10 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define BASE 0
-#define NAV 1
-#define NUM 2
-#define FUN 3
-#define ADJ 4
-
-#define COMBO(LAYER, POSITION, BINDING) \
-combo_ ## LAYER ## _ ## POSITION { \
-  layers = <LAYER>; \
-  key-positions = <POSITION>; \
-  bindings = <BINDING>; \
-  timeout-ms = <25>; \
-};
+#define NAV 2
+#define NUM 3
+#define FUN 4
+#define ADJ 5
 
 / {
         behaviors {
@@ -29,62 +21,12 @@ combo_ ## LAYER ## _ ## POSITION { \
                         compatible = "zmk,behavior-hold-tap";
                         label = "HOMEROW_MODS";
                         #binding-cells = <2>;
-                        tapping-term-ms = <150>;
-                        quick_tap_ms = <20>;
-                        flavor = "tap-preferred";
-                        global-quick-tap;
+                        tapping-term-ms = <220>;
+                        quick_tap_ms = <0>;
+                        flavor = "balanced";
                         bindings = <&kp>, <&kp>;
                 };
         };
-
-          /* combo_tab { */
-          /*   timeout-ms = <25>; */
-          /*   key-positions = <3 4>; */
-          /*   bindings = <&kp TAB>; */
-          /*   layers = < BASE >; */
-          /* }; */
-
-        combos {
-          compatible = "zmk,combos";
-          COMBO(BASE, 3 4, &kp TAB)
-          COMBO(BASE, 16 17, &kp COLON)
-          COMBO(BASE, 17 18, &kp SQT)
-          COMBO(BASE, 12 22, &kp FSLH)
-          COMBO(BASE, 13 23, &kp BSLH)
-          COMBO(BASE, 13 23, &kp BSLH)
-          COMBO(BASE, 23 25, &kp CAPS)
-          COMBO(BASE, 26 27, &kp SEMI)
-        };
-
-/**
-
-// combos:
-// rt tab
-// jk :
-// kl ;
-// dc /
-// fv \
-
-NUM rite thum
-1 2 3 4 5     6 7 8 9 0
-[ ] ( ) pg_up < v ^ > ;
-{ } / \ pg_dn n n m , .
-
-https://zmk.dev/docs/features/combos
-https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/
-https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum#oneshot-modifiers
-https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/hn4fo5r/
-https://github.com/kagoromo/zmk-config/blob/master/config/west.yml
-https://zmk.dev/blog/2022/04/10/zmk-sotf-5
-https://github.com/MrMarble/zmk-viewer
-
-SYM left thum
-! @ # $ % ^ & * ( )
-[ ] ( ) pg_up _ = - < >
-{ } / \ pg_dn n - m , .
-vol shit  
-symblz
-
 
         keymap {
                 compatible = "zmk,keymap";
@@ -92,10 +34,10 @@ symblz
 
                 default_layer {
                         bindings = <
-   &kp Q       &kp W       &kp E          &kp R          &kp T             &kp Y        &kp U         &kp I            &kp O          &kp P
+   &mt RALT Q  &kp W       &kp E          &kp R          &kp T             &kp Y        &kp U         &kp I            &kp O          &mt RALT P
    &kp A       &kp S       &kp D          &kp F          &kp G             &kp H        &kp J         &kp K            &kp L          &kp SEMI
-   &hm LALT Z  &hm LGUI X  &hm LCTRL C    &hm LSHFT V    &hm LGUI b        &hm LGUI n   &hm RSHFT M   &hm LCTRL COMMA  &hm LGUI DOT   &hm LALT FSLH
-                           &mt LGUI ESC   &lt NAV BSPC   &kp BSPC          &lt FUN RET  &lt NUM SPACE &lt FUN DEL
+   &hm LALT Z  &hm LGUI X  &hm LCTRL C    &hm LSHFT V    &kp B             &kp N        &hm RSHFT M   &hm LCTRL COMMA  &hm LGUI DOT   &hm LALT FSLH
+                           &mt RCTL ESC   &lt NAV BSPC   &kp TAB           &kp RET      &lt NUM SPACE &lt FUN DEL
                         >;
                 };
  
@@ -104,7 +46,7 @@ symblz
    &none     &none         &none          &none          &tog NUM          &kp CAPS     &kp C_VOL_DN  &kp C_VOL_UP     &kp K_MUTE     &none
    &kp LALT  &kp LGUI      &kp LCTRL      &kp LSHFT      &none             &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT      &none
    &kp LALT  &kp LGUI      &kp LCTRL      &kp LSHFT      &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none
-                           &none          &kp BSPC       &none             &lt FUN RET  &kp SPACE     &kp DEL
+                           &none          &kp BSPC       &none             &kp RET      &kp SPACE     &kp DEL
                         >;
                 };
 
@@ -119,9 +61,9 @@ symblz
 
                 fun_layer {
                         bindings = <
-   &kp F12     &kp F7      &kp F8         &kp F9         &nope             &none        &none         &none            &none       &none
-   &kp F11     &kp F4      &kp C_VOL_UP   &kp C_VOL_DN   &kp C_MUTE        &none        &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
-   &kp F10     &kp F1      &kp F2         &kp F3         &nope             &none        &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
+   &kp F12     &kp F7      &kp F8         &kp F9         &kp PSCRN         &none        &none         &none            &none       &none
+   &kp F11     &kp F4      &kp F5         &kp F6         &kp SLCK          &none        &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
+   &kp F10     &kp F1      &kp F2         &kp F3         &kp PAUSE_BREAK   &none        &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
                            &none          &kp BSPC       &kp TAB           &mo ADJ      &kp SPACE     &none
                         >;
                 };
