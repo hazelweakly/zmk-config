@@ -15,13 +15,13 @@
 #define FUN 3
 #define ADJ 4
 
-#define COMBO(LAYER, POSITION, BINDING) \
-combo_ ## LAYER ## _ ## POSITION { \
-  layers = <LAYER>; \
-  key-positions = <POSITION>; \
-  bindings = <BINDING>; \
-  timeout-ms = <25>; \
-};
+#define COMBO(name, keypress, keypos) \
+    combo_##name {                    \
+        layers = <0>;                 \
+        timeout-ms = <20>;            \
+        bindings = <keypress>;        \
+        key-positions = <keypos>;     \
+    };
 
 / {
         behaviors {
@@ -37,26 +37,21 @@ combo_ ## LAYER ## _ ## POSITION { \
                 };
         };
 
-          /* combo_tab { */
-          /*   timeout-ms = <25>; */
-          /*   key-positions = <3 4>; */
-          /*   bindings = <&kp TAB>; */
-          /*   layers = < BASE >; */
-          /* }; */
-
         combos {
           compatible = "zmk,combos";
-          COMBO(BASE, 3 4, &kp TAB)
-          COMBO(BASE, 16 17, &kp COLON)
-          COMBO(BASE, 17 18, &kp SQT)
-          COMBO(BASE, 12 22, &kp FSLH)
-          COMBO(BASE, 13 23, &kp BSLH)
-          COMBO(BASE, 13 23, &kp BSLH)
-          COMBO(BASE, 23 25, &kp CAPS)
-          COMBO(BASE, 26 27, &kp SEMI)
+          COMBO(tab, 3 4, &kp TAB)
+          COMBO(sqt, 7 8, &kp SQT)
+          COMBO(colon, 16 17, &kp COLON)
+          COMBO(sqt, 17 18, &kp SQT)
+          COMBO(fslh, 12 22, &kp FSLH)
+          COMBO(bslh, 13 23, &kp BSLH)
+          COMBO(caps, 23 25, &kp CAPS)
+          COMBO(semi, 26 27, &kp SEMI)
         };
 
 /**
+
+Trying to recreate my entire keymap from my old keyboard from memory. RIP.
 
 // combos:
 // rt tab
@@ -80,10 +75,10 @@ https://github.com/MrMarble/zmk-viewer
 
 SYM left thum
 ! @ # $ % ^ & * ( )
-[ ] ( ) pg_up _ = - < >
-{ } / \ pg_dn n - m , .
-vol shit  
-symblz
+[ ] ( ) pg_up ~ = - < >
+{ } / \ pg_dn | - m , .
+
+**/
 
 
         keymap {
@@ -94,25 +89,27 @@ symblz
                         bindings = <
    &kp Q       &kp W       &kp E          &kp R          &kp T             &kp Y        &kp U         &kp I            &kp O          &kp P
    &kp A       &kp S       &kp D          &kp F          &kp G             &kp H        &kp J         &kp K            &kp L          &kp SEMI
-   &hm LALT Z  &hm LGUI X  &hm LCTRL C    &hm LSHFT V    &hm LGUI b        &hm LGUI n   &hm RSHFT M   &hm LCTRL COMMA  &hm LGUI DOT   &hm LALT FSLH
-                           &mt LGUI ESC   &lt NAV BSPC   &kp BSPC          &lt FUN RET  &lt NUM SPACE &lt FUN DEL
+   &hm LALT Z  &hm LGUI X  &hm LSHFT C    &hm LCTRL V    &hm LGUI B        &hm LGUI N   &hm RCTRL M   &hm LSHFT COMMA  &hm LGUI DOT   &hm LALT FSLH
+                           &mt LGUI ESC   &lt NAV BSPC   &kp BSPC          &lt FUN RET  &lt NUM SPACE &lt ADJ DEL
                         >;
                 };
  
+   /* &kp LBRC  &kp RBRC      &kp FSLH      &kp BSLH      &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none */
+
                 nav_layer {
                         bindings = <
-   &none     &none         &none          &none          &tog NUM          &kp CAPS     &kp C_VOL_DN  &kp C_VOL_UP     &kp K_MUTE     &none
-   &kp LALT  &kp LGUI      &kp LCTRL      &kp LSHFT      &none             &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT      &none
-   &kp LALT  &kp LGUI      &kp LCTRL      &kp LSHFT      &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none
+   &kp N1    &kp N2        &kp N3         &kp N4         &kp N5            &kp N6       &kp N7        &kp N8           &kp N9         &kp N0
+   &kp LBKT  &kp RBKT      &kp LBRC       &kp RBRC       &kp GRAVE         &kp TILDE    &kp EQUAL     &kp MINUS        &kp RIGHT      &none
+   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp HOME     &kp PG_DN     &kp UNDER        &kp END        &kp QMARK
                            &none          &kp BSPC       &none             &lt FUN RET  &kp SPACE     &kp DEL
                         >;
                 };
 
                 num_layer {
                         bindings = <
-   &kp LBKT    &kp N7      &kp N8         &kp N9         &kp RBKT          &tog NUM     &none         &none            &none          &none
-   &kp SQT     &kp N4      &kp N5         &kp N6         &kp EQUAL         &kp DEL      &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
-   &kp GRAVE   &kp N1      &kp N2         &kp N3         &kp BSLH          &none        &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
+   &kp EXCL    &kp AT      &kp HASH       &kp DLLR       &kp PRCNT         &kp CARET    &kp AMPS      &kp STAR         &kp LPAR       &kp RPAR
+   &kp LBKT  &kp RBKT      &kp LBRC       &kp RBRC       &kp GRAVE         &kp TILDE    &kp DOWN      &kp UP           &kp RIGHT      &none
+   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLSH      &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none
                            &kp DOT        &kp N0         &kp MINUS         &none        &none         &none
                         >;
                 };
@@ -120,8 +117,8 @@ symblz
                 fun_layer {
                         bindings = <
    &kp F12     &kp F7      &kp F8         &kp F9         &nope             &none        &none         &none            &none       &none
-   &kp F11     &kp F4      &kp C_VOL_UP   &kp C_VOL_DN   &kp C_MUTE        &none        &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
-   &kp F10     &kp F1      &kp F2         &kp F3         &nope             &none        &kp LSHFT     &kp LCTRL        &kp LGUI       &kp LALT
+   &kp F11     &kp F4      &kp C_VOL_DN   &kp C_VOL_UP   &kp C_MUTE        &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT   &kp LALT
+   &kp F10     &kp F1      &kp F2         &kp F3         &nope             &none        &kp LSHFT     &kp LCTRL        &kp LGUI    &kp LALT
                            &none          &kp BSPC       &kp TAB           &mo ADJ      &kp SPACE     &none
                         >;
                 };
