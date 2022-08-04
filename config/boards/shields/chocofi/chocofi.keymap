@@ -15,7 +15,7 @@
 #define FUN 3
 #define ADJ 4
 
-#define COMBO(name, keypress, keypos) \
+#define COMBO(name, keypos, keypress) \
     combo_##name {                    \
         layers = <0>;                 \
         timeout-ms = <20>;            \
@@ -93,13 +93,11 @@ SYM left thum
                            &mt LGUI ESC   &lt NAV BSPC   &kp BSPC          &lt FUN RET  &lt NUM SPACE &lt ADJ DEL
                         >;
                 };
- 
-   /* &kp LBRC  &kp RBRC      &kp FSLH      &kp BSLH      &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none */
 
                 nav_layer {
                         bindings = <
-   &kp N1    &kp N2        &kp N3         &kp N4         &kp N5            &kp N6       &kp N7        &kp N8           &kp N9         &kp N0
-   &kp LBKT  &kp RBKT      &kp LBRC       &kp RBRC       &kp GRAVE         &kp TILDE    &kp EQUAL     &kp MINUS        &kp RIGHT      &none
+   &kp EXCL  &kp AT        &kp HASH       &kp DLLR       &kp PRCNT         &kp CARET    &kp AMPS      &kp STAR         &kp LPAR       &kp RPAR
+   &kp LBKT  &kp RBKT      &kp LBRC       &kp RBRC       &kp GRAVE         &kp TILDE    &kp EQUAL     &kp MINUS        &kp LBKT       &kp RBKT
    &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp HOME     &kp PG_DN     &kp UNDER        &kp END        &kp QMARK
                            &none          &kp BSPC       &none             &lt FUN RET  &kp SPACE     &kp DEL
                         >;
@@ -107,18 +105,18 @@ SYM left thum
 
                 num_layer {
                         bindings = <
-   &kp EXCL    &kp AT      &kp HASH       &kp DLLR       &kp PRCNT         &kp CARET    &kp AMPS      &kp STAR         &kp LPAR       &kp RPAR
+   &kp N1    &kp N2        &kp N3         &kp N4         &kp N5            &kp N6       &kp N7        &kp N8           &kp N9         &kp N0
    &kp LBKT  &kp RBKT      &kp LBRC       &kp RBRC       &kp GRAVE         &kp TILDE    &kp DOWN      &kp UP           &kp RIGHT      &none
-   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLSH      &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none
+   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none
                            &kp DOT        &kp N0         &kp MINUS         &none        &none         &none
                         >;
                 };
 
                 fun_layer {
                         bindings = <
-   &kp F12     &kp F7      &kp F8         &kp F9         &nope             &none        &none         &none            &none       &none
+   &kp F12     &kp F7      &kp F8         &kp F9         &none             &none        &none         &none            &none       &none
    &kp F11     &kp F4      &kp C_VOL_DN   &kp C_VOL_UP   &kp C_MUTE        &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT   &kp LALT
-   &kp F10     &kp F1      &kp F2         &kp F3         &nope             &none        &kp LSHFT     &kp LCTRL        &kp LGUI    &kp LALT
+   &kp F10     &kp F1      &kp F2         &kp F3         &none             &none        &kp LSHFT     &kp LCTRL        &kp LGUI    &kp LALT
                            &none          &kp BSPC       &kp TAB           &mo ADJ      &kp SPACE     &none
                         >;
                 };
