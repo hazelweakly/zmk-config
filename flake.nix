@@ -22,6 +22,7 @@
           west
         ]))
         ccache
+        just
         cmake
         dfu-util
         dtc
