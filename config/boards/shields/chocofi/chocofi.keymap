@@ -29,9 +29,8 @@
                         compatible = "zmk,behavior-hold-tap";
                         label = "HOMEROW_MODS";
                         #binding-cells = <2>;
-                        tapping-term-ms = <160>;
-                        quick_tap_ms = <70>;
-                        flavor = "balanced";
+                        tapping-term-ms = <125>;
+                        fllavor = "tap-unless-interrupted";
                         bindings = <&kp>, <&kp>;
                 };
         };
@@ -44,8 +43,18 @@
           COMBO(sqt, 17 18, &kp SQT)
           COMBO(fslh, 12 22, &kp FSLH)
           COMBO(bslh, 13 23, &kp BSLH)
-          COMBO(caps, 23 25, &kp CAPS)
+          COMBO(caps, 23 25, &caps_word)
           COMBO(semi, 26 27, &kp SEMI)
+          COMBO(one, 0 10, &kp N0)
+          COMBO(one, 1 11, &kp N1)
+          COMBO(one, 2 12, &kp N2)
+          COMBO(one, 3 13, &kp N3)
+          COMBO(one, 4 14, &kp N4)
+          COMBO(one, 5 15, &kp N5)
+          COMBO(one, 6 16, &kp N6)
+          COMBO(one, 7 17, &kp N7)
+          COMBO(one, 8 18, &kp N8)
+          COMBO(one, 9 19, &kp N9)
         };
 
 /**
@@ -73,6 +82,14 @@ SYM left thum
 **/
 
 
+&mt {
+    tapping-term-ms = <125>;
+};
+
+&lt {
+    tapping-term-ms = <125>;
+};
+
         keymap {
                 compatible = "zmk,keymap";
 
@@ -81,7 +98,7 @@ SYM left thum
                         bindings = <
    &kp Q       &kp W       &kp E          &kp R          &kp T             &kp Y        &kp U         &kp I            &kp O          &kp P
    &kp A       &kp S       &kp D          &kp F          &kp G             &kp H        &kp J         &kp K            &kp L          &kp SEMI
-   &hm LALT Z  &hm LGUI X  &hm LCTRL C    &hm LSHFT V    &hm LGUI B        &hm LGUI N   &hm RSHFT M   &hm LCTRL COMMA  &hm LGUI DOT   &hm LALT FSLH
+   &hm LALT Z  &hm LGUI X  &hm LCTRL C    &hm LSHFT V    &kp B             &kp N        &hm RSHFT M   &hm LCTRL COMMA  &hm LGUI DOT   &hm LALT FSLH
                            &mt LGUI ESC   &lt NAV BSPC   &kp BSPC          &lt FUN RET  &lt NUM SPACE &lt ADJ DEL
                         >;
                 };
@@ -89,8 +106,8 @@ SYM left thum
                 nav_layer {
                         bindings = <
    &kp EXCL  &kp AT        &kp HASH       &kp DLLR       &kp PRCNT         &kp CARET    &kp AMPS      &kp STAR         &kp LPAR       &kp RPAR
-   &kp LBKT  &kp RBKT      &kp LBRC       &kp RBRC       &kp GRAVE         &kp TILDE    &kp EQUAL     &kp UNDER        &kp LBKT       &kp RBKT
-   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp HOME     &kp PG_DN     &kp MINUS        &kp END        &kp QMARK
+   &kp LPAR  &kp RPAR      &kp LBKT       &kp RBKT       &kp GRAVE         &kp TILDE    &kp EQUAL     &kp UNDER        &kp LBKT       &kp RBKT
+   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp PIPE     &kp PG_DN     &kp MINUS        &kp END        &kp QMARK
                            &none          &kp BSPC       &none             &lt FUN RET  &kp SPACE     &kp DEL
                         >;
                 };
@@ -98,7 +115,7 @@ SYM left thum
                 num_layer {
                         bindings = <
    &kp N1    &kp N2        &kp N3         &kp N4         &kp N5            &kp N6       &kp N7        &kp N8           &kp N9         &kp N0
-   &kp LBKT  &kp RBKT      &kp LBRC       &kp RBRC       &kp GRAVE         &kp TILDE    &kp DOWN      &kp UP           &kp RIGHT      &none
+   &kp LPAR  &kp RPAR      &kp LBKT       &kp RBKT       &kp GRAVE         &none        &none         &none            &none          &none
    &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none
                            &kp DOT        &kp N0         &kp MINUS         &none        &none         &none
                         >;
@@ -106,10 +123,10 @@ SYM left thum
 
                 fun_layer {
                         bindings = <
-   &kp F12     &kp F7      &kp F8         &kp F9         &none             &none        &none         &none            &none       &none
+   &kp N1      &kp N2      &kp N3         &kp N4         &kp N5            &kp N6       &kp N7        &kp N8           &kp N9         &kp N0
    &kp F11     &kp F4      &kp C_VOL_DN   &kp C_VOL_UP   &kp C_MUTE        &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT   &kp LALT
    &kp F10     &kp F1      &kp F2         &kp F3         &none             &none        &kp LSHFT     &kp LCTRL        &kp LGUI    &kp LALT
-                           &none          &kp BSPC       &kp TAB           &mo ADJ      &kp SPACE     &none
+                           &none          &kp BSPC       &kp TAB           &none        &kp SPACE     &none
                         >;
                 };
 
