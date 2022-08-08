@@ -4,6 +4,21 @@
  * SPDX-License-Identifier: MIT
  */
 
+
+/**
+
+Keymap ideas for later
+
+https://zmk.dev/docs/features/combos
+https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/
+https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum#oneshot-modifiers
+https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/hn4fo5r/
+https://github.com/kagoromo/zmk-config/blob/master/config/west.yml
+https://zmk.dev/blog/2022/04/10/zmk-sotf-5
+https://github.com/MrMarble/zmk-viewer
+
+**/
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -11,9 +26,8 @@
 
 #define BASE 0
 #define NAV 1
-#define NUM 2
-#define FUN 3
-#define ADJ 4
+#define FUN 2
+#define ADJ 3
 
 #define COMBO(name, keypos, keypress) \
     combo_##name {                    \
@@ -24,99 +38,57 @@
         slow-release;                 \
     };
 
-#define TAP_TERM_MS 130
+#define TAP_TERM_MS 125
 
 &mt {
     tapping-term-ms = <TAP_TERM_MS>;
+    quick-tap-ms = <200>;
 };
 
 &lt {
     tapping-term-ms = <TAP_TERM_MS>;
+    quick-tap-ms = <200>;
+};
+
+&kscan0 {
+  debounce-press-ms = <1>;
+  debounce-release-ms = <5>;
 };
 
 
 / {
-        behaviors {
-                hmr: homerow_mods_right {
-                        compatible = "zmk,behavior-hold-tap";
-                        label = "HOMEROW_MODS_RIGHT";
-                        #binding-cells = <2>;
-                        tapping-term-ms = <TAP_TERM_MS>;
-                        flavor = "tap-preferred";
-                        quick-tap-ms = <200>;
-                        bindings = <&kp>, <&kp>;
-                        hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 23 23 24 26 27 28 29 30 31 32 33 34 35>;
-                };
-
-                hml: homerow_mods_left {
-                        compatible = "zmk,behavior-hold-tap";
-                        label = "HOMEROW_MODS_LEFT";
-                        #binding-cells = <2>;
-                        tapping-term-ms = <TAP_TERM_MS>;
-                        flavor = "tap-preferred";
-                        quick-tap-ms = <200>;
-                        bindings = <&kp>, <&kp>;
-                        hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 20 21 22 23 25 26 27 28 29 30 31 32 33 34 35>;
-                };
-
-                tui: tap_unless_interrupted {
-                        compatible = "zmk,behavior-hold-tap";
-                        label = "TAPPY_TAP";
-                        #binding-cells = <2>;
-                        tapping-term-ms = <150>;
-                        flavor = "tap-preferred";
-                        quick-tap-ms = <200>;
-                        bindings = <&mo>, <&kp>;
-                };
-        };
-
         combos {
           compatible = "zmk,combos";
           COMBO(tab, 3 4, &kp TAB)
           COMBO(sqt, 7 8, &kp SQT)
           COMBO(colon, 16 17, &kp COLON)
           COMBO(sqt, 17 18, &kp SQT)
-          COMBO(fslh, 12 22, &kp FSLH)
-          COMBO(bslh, 13 23, &kp BSLH)
           COMBO(caps, 23 26, &caps_word)
           COMBO(semi, 26 27, &kp SEMI)
+
+          COMBO(hrZ, 10 20, &kp LALT)
+          COMBO(hrX, 11 21, &kp LGUI)
+          COMBO(hrC, 12 22, &kp LCTRL)
+          COMBO(hrV, 13 23, &kp LSHFT)
+          COMBO(hrB, 14 24, &kp LALT)
+          COMBO(hrN, 15 25, &kp LALT)
+          COMBO(hrM, 16 26, &kp RSHFT)
+          COMBO(hrK, 17 27, &kp RCTRL)
+          COMBO(hrL, 18 28, &kp RGUI)
+          COMBO(hrP, 19 29, &kp LALT)
+
        };
-
-/**
-
-Trying to recreate my entire keymap from my old keyboard from memory. RIP.
-
-NUM rite thum
-1 2 3 4 5     6 7 8 9 0
-[ ] ( ) pg_up < v ^ > ;
-{ } / \ pg_dn n n m , .
-
-https://zmk.dev/docs/features/combos
-https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/
-https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum#oneshot-modifiers
-https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/hn4fo5r/
-https://github.com/kagoromo/zmk-config/blob/master/config/west.yml
-https://zmk.dev/blog/2022/04/10/zmk-sotf-5
-https://github.com/MrMarble/zmk-viewer
-
-SYM left thum
-! @ # $ % ^ & * ( )
-[ ] ( ) pg_up ~ = - < >
-{ } / \ pg_dn | - m , .
-
-**/
 
 
         keymap {
                 compatible = "zmk,keymap";
 
-
                 default_layer {
                         bindings = <
    &kp Q       &kp W       &kp E          &kp R          &kp T             &kp Y        &kp U          &kp I            &kp O          &kp P
    &kp A       &kp S       &kp D          &kp F          &kp G             &kp H        &kp J          &kp K            &kp L          &kp SEMI
-   &hml LALT Z &hml LGUI X &hml LCTRL C   &hml LSHFT V   &kp B             &kp N        &hmr RSHFT M   &hmr LCTRL COMMA &hmr LGUI DOT  &hmr LALT FSLH
-                           &mt LGUI ESC   &lt NAV BSPC   &kp BSPC          &tui FUN RET &tui NUM SPACE &tui ADJ DEL
+   &kp Z       &kp X       &kp C          &kp V          &kp B             &kp N        &kp M          &kp COMMA        &kp DOT        &kp FSLH
+                           &mt LGUI ESC   &lt NAV BSPC   &kp LSHFT         &lt FUN RET  &kp SPACE &lt ADJ DEL
                         >;
                 };
 
@@ -124,26 +96,17 @@ SYM left thum
                         bindings = <
    &kp EXCL  &kp AT        &kp HASH       &kp DLLR       &kp PRCNT         &kp CARET    &kp AMPS      &kp STAR         &kp LPAR       &kp RPAR
    &kp LPAR  &kp RPAR      &kp LBKT       &kp RBKT       &kp GRAVE         &kp TILDE    &kp EQUAL     &kp UNDER        &kp LBKT       &kp RBKT
-   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp PIPE     &kp PG_DN     &kp MINUS        &kp END        &kp QMARK
-                           &none          &kp BSPC       &none             &tui FUN RET &kp SPACE     &kp DEL
-                        >;
-                };
-
-                num_layer {
-                        bindings = <
-   &kp N1    &kp N2        &kp N3         &kp N4         &kp N5            &kp N6       &kp N7        &kp N8           &kp N9         &kp N0
-   &kp LPAR  &kp RPAR      &kp LBKT       &kp RBKT       &kp GRAVE         &none        &none         &none            &none          &none
-   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp HOME     &kp PG_DN     &kp PG_UP        &kp END        &none
-                           &kp DOT        &kp N0         &kp MINUS         &none        &none         &none
+   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp PIPE     &kp PLUS      &kp MINUS        &kp LT         &kp GT
+                           &none          &none          &kp BSPC          &lt FUN RET  &kp SPACE     &kp DEL
                         >;
                 };
 
                 fun_layer {
                         bindings = <
-   &kp N1      &kp N2      &kp N3         &kp N4         &kp N5            &kp N6       &kp N7        &kp N8           &kp N9      &kp N0
-   &kp F11     &kp F4      &kp C_VOL_DN   &kp C_VOL_UP   &kp C_MUTE        &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT   &kp LALT
-   &kp F10     &kp F1      &kp F2         &kp F3         &none             &none        &kp LSHFT     &kp LCTRL        &kp LGUI    &kp LALT
-                           &none          &kp BSPC       &kp TAB           &none        &kp SPACE     &none
+   &kp N1      &kp N2       &kp N3         &kp N4        &kp N5            &kp N6       &kp N7        &kp N8           &kp N9      &kp N0
+   &kp F11     &kp C_VOL_DN &kp C_VOL_UP   &kp C_MUTE    &none             &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT   &kp LALT
+   &kp F10     &kp F1       &kp F2         &kp F3        &none             &none        &none         &none            &none       &none
+                            &none          &none         &kp BSPC          &none        &kp SPACE     &none
                         >;
                 };
 
