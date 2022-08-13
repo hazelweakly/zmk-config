@@ -9,7 +9,6 @@
 
 Keymap ideas for later
 
-https://zmk.dev/docs/features/combos
 https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/
 https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum#oneshot-modifiers
 https://www.reddit.com/r/ErgoMechKeyboards/comments/r7y42o/keymap_tinkering/hn4fo5r/
@@ -23,16 +22,21 @@ https://github.com/MrMarble/zmk-viewer
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/mouse.h>
 
 #define BASE 0
 #define NAV 1
 #define FUN 2
 #define ADJ 3
 
+#define MMOVE_UP MOVE_VERT(-1400)
+#define MMOVE_DOWN MOVE_VERT(1400)
+#define MMOVE_LEFT MOVE_HOR(-1400)
+#define MMOVE_RIGHT MOVE_HOR(1400)
+
 #define COMBO(name, keypos, keypress) \
     combo_##name {                    \
-        layers = <0>;                 \
-        timeout-ms = <25>;            \
+        timeout-ms = <40>;            \
         bindings = <keypress>;        \
         key-positions = <keypos>;     \
         slow-release;                 \
@@ -51,8 +55,8 @@ https://github.com/MrMarble/zmk-viewer
 };
 
 &kscan0 {
-  debounce-press-ms = <1>;
-  debounce-release-ms = <5>;
+  debounce-press-ms = <2>;
+  debounce-release-ms = <6>;
 };
 
 
@@ -85,10 +89,10 @@ https://github.com/MrMarble/zmk-viewer
 
                 default_layer {
                         bindings = <
-   &kp Q       &kp W       &kp E          &kp R          &kp T             &kp Y        &kp U          &kp I            &kp O          &kp P
-   &kp A       &kp S       &kp D          &kp F          &kp G             &kp H        &kp J          &kp K            &kp L          &kp SEMI
-   &kp Z       &kp X       &kp C          &kp V          &kp B             &kp N        &kp M          &kp COMMA        &kp DOT        &kp FSLH
-                           &mt LGUI ESC   &lt NAV BSPC   &kp LSHFT         &lt FUN RET  &kp SPACE &lt ADJ DEL
+   &kp Q       &kp W       &kp E          &kp R          &kp T             &kp Y        &kp U      &kp I            &kp O          &kp P
+   &kp A       &kp S       &kp D          &kp F          &kp G             &kp H        &kp J      &kp K            &kp L          &kp SEMI
+   &kp Z       &kp X       &kp C          &kp V          &kp B             &kp N        &kp M      &kp COMMA        &kp DOT        &kp FSLH
+                           &mt LGUI ESC   &lt NAV BSPC   &kp LSHFT         &lt FUN RET  &kp SPACE  &lt ADJ DEL
                         >;
                 };
 
@@ -103,10 +107,10 @@ https://github.com/MrMarble/zmk-viewer
 
                 fun_layer {
                         bindings = <
-   &kp N1      &kp N2       &kp N3         &kp N4        &kp N5            &kp N6       &kp N7        &kp N8           &kp N9      &kp N0
-   &kp F11     &kp C_VOL_DN &kp C_VOL_UP   &kp C_MUTE    &none             &kp LEFT     &kp DOWN      &kp UP           &kp RIGHT   &kp LALT
-   &kp F10     &kp F1       &kp F2         &kp F3        &none             &none        &none         &none            &none       &none
-                            &none          &none         &kp BSPC          &none        &kp SPACE     &none
+   &kp N1      &kp N2       &kp N3         &kp N4        &kp N5            &kp N6          &kp N7          &kp N8           &kp N9           &kp N0
+   &kp F11     &kp C_VOL_DN &kp C_VOL_UP   &kp C_MUTE    &kp PG_UP         &kp LEFT        &kp DOWN        &kp UP           &kp RIGHT        &kp LALT
+   &kp F10     &mkp LCLK    &mkp MCLK      &mkp RCLK     &kp PG_DN         &mmv MMOVE_LEFT &mmv MMOVE_DOWN &mmv MMOVE_UP    &mmv MMOVE_RIGHT &none
+                            &trans         &trans        &trans            &trans          &trans          &trans
                         >;
                 };
 
@@ -115,7 +119,7 @@ https://github.com/MrMarble/zmk-viewer
    &none         &none         &none         &none        &none            &none        &none   &none   &none   &none
    &bt BT_CLR    &bt BT_PRV    &bt BT_NXT    &reset       &bootloader      &bootloader  &reset  &none   &none   &none
    &out OUT_TOG  &none         &none         &none        &none            &none        &none   &none   &none   &none
-                               &none         &none        &none            &none        &none   &none
+                               &trans        &trans       &trans           &trans       &trans  &trans
                         >;
                 };
         };
