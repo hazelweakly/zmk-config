@@ -16,6 +16,8 @@ https://github.com/kagoromo/zmk-config/blob/master/config/west.yml
 https://zmk.dev/blog/2022/04/10/zmk-sotf-5
 https://github.com/MrMarble/zmk-viewer
 
+Compose key or something like that for common unicode symbols that I use?
+
 **/
 
 #include <behaviors.dtsi>
@@ -55,7 +57,7 @@ https://github.com/MrMarble/zmk-viewer
 };
 
 &kscan0 {
-  debounce-press-ms = <2>;
+  debounce-press-ms = <4>;
   debounce-release-ms = <6>;
 };
 
@@ -100,16 +102,16 @@ https://github.com/MrMarble/zmk-viewer
                         bindings = <
    &kp EXCL  &kp AT        &kp HASH       &kp DLLR       &kp PRCNT         &kp CARET    &kp AMPS      &kp STAR         &kp LPAR       &kp RPAR
    &kp LPAR  &kp RPAR      &kp LBKT       &kp RBKT       &kp GRAVE         &kp TILDE    &kp EQUAL     &kp UNDER        &kp LBKT       &kp RBKT
-   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &none             &kp PIPE     &kp PLUS      &kp MINUS        &kp LT         &kp GT
-                           &none          &none          &kp BSPC          &lt FUN RET  &kp SPACE     &kp DEL
+   &kp LBRC  &kp RBRC      &kp FSLH       &kp BSLH       &kp F12           &kp PIPE     &kp PLUS      &kp MINUS        &kp LT         &kp GT
+                           &trans         &trans         &trans            &trans       &trans        &trans
                         >;
                 };
 
                 fun_layer {
                         bindings = <
    &kp N1      &kp N2       &kp N3         &kp N4        &kp N5            &kp N6          &kp N7          &kp N8           &kp N9           &kp N0
-   &kp F11     &kp C_VOL_DN &kp C_VOL_UP   &kp C_MUTE    &kp PG_UP         &kp LEFT        &kp DOWN        &kp UP           &kp RIGHT        &kp LALT
-   &kp F10     &mkp LCLK    &mkp MCLK      &mkp RCLK     &kp PG_DN         &mmv MMOVE_LEFT &mmv MMOVE_DOWN &mmv MMOVE_UP    &mmv MMOVE_RIGHT &none
+   &kp F12     &kp C_VOL_DN &kp C_VOL_UP   &kp C_MUTE    &kp PG_UP         &kp LEFT        &kp DOWN        &kp UP           &kp RIGHT        &kp LALT
+   &kp F11     &mkp LCLK    &mkp MCLK      &mkp RCLK     &kp PG_DN         &mmv MMOVE_LEFT &mmv MMOVE_DOWN &mmv MMOVE_UP    &mmv MMOVE_RIGHT &none
                             &trans         &trans        &trans            &trans          &trans          &trans
                         >;
                 };
