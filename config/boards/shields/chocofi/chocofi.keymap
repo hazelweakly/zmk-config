@@ -71,6 +71,7 @@ Compose key or something like that for common unicode symbols that I use?
           COMBO(sqt, 17 18, &kp SQT)
           COMBO(caps, 23 26, &caps_word)
           COMBO(semi, 26 27, &kp SEMI)
+          COMBO(lADJ, 31 32, &mo ADJ)
 
           COMBO(hrZ, 10 20, &kp LALT)
           COMBO(hrX, 11 21, &kp LGUI)
@@ -119,8 +120,8 @@ Compose key or something like that for common unicode symbols that I use?
                 adj_layer {
                         bindings = <
    &none         &none         &none         &none        &none            &none        &none   &none   &none   &none
-   &bt BT_CLR    &bt BT_PRV    &bt BT_NXT    &reset       &bootloader      &bootloader  &reset  &none   &none   &none
-   &out OUT_TOG  &none         &none         &none        &none            &none        &none   &none   &none   &none
+   &bt BT_CLR    &none         &none         &reset       &bootloader      &bootloader  &reset  &none   &none   &none
+   &none         &none         &none         &none        &none            &none        &none   &none   &none   &none
                                &trans        &trans       &trans           &trans       &trans  &trans
                         >;
                 };
